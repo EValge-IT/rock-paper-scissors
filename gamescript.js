@@ -1,6 +1,8 @@
+// used to track computer and player scores throughout the game.
 let computerScore = 0;
 let playerScore = 0;
 
+// randomly generate a number and link it to either rock, paper or scissors
 function computerPlay(){
     let random = Math.floor(Math.random() * 3 + 1);
     let computerGuess;
@@ -15,6 +17,7 @@ function computerPlay(){
     return computerGuess;
 }
 
+// play a round of rock, paper, scissors. The logic to calculate winning hand is done within this function
 function playRound(playerSelection, computerSelection){
 
     if (playerSelection == "rock" && computerSelection == "paper"){
@@ -43,12 +46,16 @@ function playRound(playerSelection, computerSelection){
     
 }
 
+// function which prompts the user to enter their selection
 function getPlayerInput(){
     let playerSelectionInput = prompt("Rock, Paper or Scissors?");
     playerSelectionInput = playerSelectionInput.toLowerCase();
     return playerSelectionInput;
 }
 
+// function to play the game, the game will run until either the player or computer scores 5.
+// once a winner has been detected displays the reset button and changes the background color
+// of body.
 function game(){
 
     while (computerScore !== 5 && playerScore !== 5) {
@@ -69,6 +76,8 @@ function game(){
     }
 }
 
+// function which resets the game back to its initial state. 
+//This allows the user to play again without refreshing the page
 function resetGame(){
     document.body.style.backgroundColor = "white";
     computerScore = 0;
