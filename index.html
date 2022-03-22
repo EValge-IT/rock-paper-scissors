@@ -7,11 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    
-    <button id="startButton" onclick="game()">Start Game</button>
-    <button style="display: none;" id="resetButton" onclick="resetGame()">Reset</button>
+    <p id="selectionText" >Take your pick:</p>
+    <button id="rockPlay" onclick="playerSelection('rock')">Rock</button>
+    <button id="paperPlay" onclick="playerSelection('paper')">Paper</button>
+    <button id="scissorsPlay" onclick="playerSelection('scissors')">Scissors</button>
+    <p id="scoreCounter">Score: </p>
+    <p>Log: </p>
+    <ol id="log">
 
-   
+    </ol>
     <script src="gamescript.js"></script> 
 </body>
 </html>

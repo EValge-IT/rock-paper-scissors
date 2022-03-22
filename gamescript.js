@@ -19,72 +19,60 @@ function computerPlay(){
 
 // play a round of rock, paper, scissors. The logic to calculate winning hand is done within this function
 function playRound(playerSelection, computerSelection){
-
+    var scoreUpdate = document.getElementById('scoreCounter');
+    var list = document.getElementById('log');
+    var entry = document.createElement('li');
+    var logEntry;
     if (playerSelection == "rock" && computerSelection == "paper"){
         computerScore ++;
-        return "You Lose!, Paper beats rock";
+        logEntry = "You Lose! Paper beats rock";
     } else if(playerSelection == "paper" && computerSelection == "scissors"){
         computerScore ++;
-        return "You Lose! Scrissors beats paper";
+        logEntry = "You Lose! Scrissors beats paper";
     } else if(playerSelection == "scissors" && computerSelection == "rock"){
         computerScore ++;
-        return "You Lose! Rock beats Scissors";
+        logEntry = "You Lose! Rock beats Scissors";
     } else if (computerSelection == "rock" && playerSelection == "paper"){
         playerScore ++;
-        return "You Win!, Paper beats rock";
+        logEntry = "You Win!, Paper beats rock";
     } else if(computerSelection == "paper" && playerSelection == "scissors"){
         playerScore ++;
-        return "You Win! Scrissors beats paper";
+        logEntry = "You Win! Scrissors beats paper";
     } else if(computerSelection == "scissors" && playerSelection == "rock"){
         playerScore ++;
-        return "You Win! Rock beats Scissors";
+        logEntry = "You Win! Rock beats Scissors";
     } else if (computerSelection == playerSelection){
-        return "Tie!";
+        logEntry = "Tie!";
     } else {
-        return "Error Invalid Guess: " + playerSelection;
+        logEntry = "Error Invalid Guess: " + playerSelection;
     }
-    
-}
+    entry.appendChild(document.createTextNode(logEntry));
+    list.appendChild(entry);
+    scoreUpdate.innerHTML = "Player: " + playerScore + " Computer: " + computerScore;
 
-// function which prompts the user to enter their selection
-function getPlayerInput(){
-    let playerSelectionInput = prompt("Rock, Paper or Scissors?");
-    playerSelectionInput = playerSelectionInput.toLowerCase();
-    return playerSelectionInput;
-}
-
-// function to play the game, the game will run until either the player or computer scores 5.
-// once a winner has been detected displays the reset button and changes the background color
-// of body.
-function game(){
-
-    while (computerScore !== 5 && playerScore !== 5) {
-        console.log(playRound(getPlayerInput(), computerPlay()));
-        console.log("Player Score: " + playerScore + " Computer Score: " + computerScore);
+    if (playerScore == 5) {
+        scoreUpdate.innerHTML = "You won!";
+        scoreUpdate.style.color = "green";
+        document.getElementById('rockPlay').style.display = "none";
+        document.getElementById('paperPlay').style.display = "none";
+        document.getElementById('scissorsPlay').style.display = "none";
+        document.getElementById('selectionText').style.display = "none";
+    } else if (computerScore == 5){
+        scoreUpdate.innerHTML = "The computer has won ;(";
+        scoreUpdate.style.color = "red";
+        document.getElementById('rockPlay').style.display = "none";
+        document.getElementById('paperPlay').style.display = "none";
+        document.getElementById('scissorsPlay').style.display = "none";
+        document.getElementById('selectionText').style.display = "none";
     }
 
-    if (computerScore == 5){
-        console.log("You lost to the computer!");
-        document.getElementById('resetButton').style.display = "inline-block";
-        document.getElementById('startButton').style.display = "none";
-        document.body.style.backgroundColor = "red";
-    } else if (playerScore == 5){
-        console.log("You beat the computer!");
-        document.getElementById('resetButton').style.display = "inline-block";
-        document.getElementById('startButton').style.display = "none";
-        document.body.style.backgroundColor = "green";
-    }
 }
 
-// function which resets the game back to its initial state. 
-//This allows the user to play again without refreshing the page
-function resetGame(){
-    document.body.style.backgroundColor = "white";
-    computerScore = 0;
-    playerScore = 0;
-    document.getElementById('resetButton').style.display = "none";
-    document.getElementById('startButton').style.display = "inline-block";
+function playerSelection(input){
+    playRound(input, computerPlay());
 }
+
+
 
 
 
